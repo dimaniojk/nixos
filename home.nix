@@ -57,6 +57,11 @@
       
     };
   };
+  
+  programs.fish.functions.nixpush = ''
+    cd /etc/nixos
+    sudo env GH_TOKEN=(gh auth token) git push
+  '';
 
   programs.kitty = {
     enable   = true;
