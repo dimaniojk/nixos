@@ -43,8 +43,14 @@
   programs.git = {
     enable = true;
   
-    userName = "Dimaniojk";
-    userEmail = "deividasjk001@gmail.com";
+    settings = {
+      user = {
+        name = "Dimaniojk";
+        email = "deividasjk001@gmail.com";
+      };
+  
+      init.defaultBranch = "main";
+    };
   };
 
   programs.fish = {
