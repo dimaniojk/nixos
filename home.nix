@@ -37,6 +37,7 @@
     loupe
     strawberry
     protonup-qt
+    gh
   ];
 
   programs.git = {
