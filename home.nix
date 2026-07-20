@@ -38,6 +38,7 @@
     strawberry
     protonup-qt
     gh
+    cloudflare-warp
   ];
 
   programs.git = {
