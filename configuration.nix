@@ -24,6 +24,8 @@ in
     25565
   ];
 
+
+  
   time.timeZone = "Europe/Riga";
 
   nix.settings = {
@@ -81,7 +83,6 @@ in
 
   services.yggdrasil = {
     enable = true;
-    persistentKeys = true;
 
     settings = {
       Peers = [
@@ -93,7 +94,7 @@ in
         "tls://[2a01:4f9:2b:2d8f::2]:1337"
         "tls://ygg-hel-1.wgos.org:45171"
       ];
-
+	  PrivateKeyPath = "/var/lib/yggdrasil/vanity.key";
       MulticastInterfaces = [ ];
     };
   };
@@ -101,6 +102,9 @@ in
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+    ];
   };
 
   programs.fish.enable = true;
@@ -130,6 +134,8 @@ in
     # Нужен системному сервису LACT.
     lact
     bambu-studio
+    clinfo
+    ocl-icd
 
     # Локальный разрабатываемый браузер пока безопаснее оставить системно.
     celeritas.packages.${pkgs.system}.default
