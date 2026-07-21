@@ -38,9 +38,15 @@
     strawberry
     protonup-qt
     gh
+	llama-cpp-vulkan
     cloudflare-warp
+    python3
+    gnupg
   ];
 
+
+
+  
   programs.git = {
     enable = true;
   
