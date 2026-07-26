@@ -42,6 +42,11 @@
     cloudflare-warp
     python3
     gnupg
+    pipes
+	gale
+    termius
+    kicad
+    freecad
   ];
 
 
