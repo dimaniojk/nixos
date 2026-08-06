@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }:
 
-let
-  celeritas = builtins.getFlake "/home/djk/celeritas-browser";
+ let
   pkgs32 = pkgs.pkgsi686Linux;
-
   radmin-vpn-linux =
     let
       pname = "radmin-vpn-linux";
@@ -136,7 +134,6 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    <home-manager/nixos>
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -180,13 +177,16 @@ in
 
     permittedInsecurePackages = [
       "olm-3.2.16"
+      "electron-40.10.5"
     ];
   };
 
   nixpkgs.overlays = [
     (import (
-      builtins.fetchTarball
-        "https://github.com/unmojang/FjordLauncher/releases/download/11.0.3.0/FjordLauncher-11.0.3.0.tar.gz"
+      builtins.fetchTarball {
+        url = "https://github.com/unmojang/FjordLauncher/releases/download/11.0.3.0/FjordLauncher-11.0.3.0.tar.gz";
+        sha256 = "1a0vrv90g19l0lpwcgdg3am1cbxv4kzrh3rkpmnmcklzw98phlgi";
+      }
     )).overlays.default
   ];
 
@@ -206,6 +206,9 @@ in
     ];
   };
 
+
+
+  
   programs.gnupg.agent = {
       enable = true;
       pinentryPackage = pkgs.pinentry-gnome3;
@@ -237,7 +240,6 @@ in
   };
 
   programs.niri.enable = true;
-  programs.dms-shell.enable = true;
 
   systemd.user.services.niri.enableDefaultPath = false;
 
@@ -246,6 +248,11 @@ in
     pulse.enable = true;
   };
 
+
+  virtualisation.docker = {
+    enable = true;
+  };
+  
   services.openssh.enable = true;
 
   services.yggdrasil = {
@@ -306,17 +313,36 @@ in
     };
   };
 
+
+
+ 
+    programs.dconf.enable = true;
+  
+    services.dbus.enable = true;
+  
+    services.gnome.gnome-keyring.enable = true;
+  
+    security.polkit.enable = true;
+
+	programs.dms-shell.enable = true;
+
+	security.rtkit.enable = true;
+
   environment.systemPackages = with pkgs; [
     lact
     bambu-studio
     clinfo
     ocl-icd
     radmin-vpn-linux
-
     llama-cpp-vulkan
     python3
-
-    celeritas.packages.${pkgs.system}.default
+	omniroute
+	libsecret
+	xdg-utils
+	bottles
+	winboat
+	docker
+	docker-compose
   ];
 
   systemd.services.lact = {

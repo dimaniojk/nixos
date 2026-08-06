@@ -47,10 +47,15 @@
     termius
     kicad
     freecad
+    darktable
+    reaper
   ];
 
 
 
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "0";
+  };
   
   programs.git = {
     enable = true;
@@ -85,10 +90,10 @@
     enable   = true;
     settings = {
       confirm_os_window_close = 0;
-      dynamic_background_opacity = true;
       window_padding_width       = 15;
       font_family                = "JetBrainsMono Nerd Font";
       font_size                  = 12;
+      background_opacity = "0.85";
     };
     extraConfig = ''
       include dank-theme.conf
@@ -148,5 +153,5 @@
     };
   };
 
-  home.stateVersion = "26.05";
+  home.stateVersion = "25.11";
 }
