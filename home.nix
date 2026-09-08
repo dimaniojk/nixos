@@ -1,156 +1,24 @@
-{ config, pkgs, ... }:
-
+# Точка сборки Home Manager для пользователя djk.
 {
+  imports = [
+    ./home/packages.nix
+    ./home/desktop/gtk.nix
+    ./home/desktop/qt.nix
+    ./home/programs/fastfetch.nix
+    ./home/programs/firefox.nix
+    ./home/programs/fish.nix
+    ./home/programs/git.nix
+    ./home/programs/kitty.nix
+    ./home/programs/obs.nix
+    ./home/xdg.nix
+  ];
+
   home.username = "djk";
   home.homeDirectory = "/home/djk";
 
-  home.packages = with pkgs; [
-    firefox
-    vesktop
-    git
-    kitty
-    kdePackages.qt6ct
-    micro
-    fastfetch
-    fjordlauncher
-    hyfetch
-    steam-run
-    xwayland-satellite
-    qbittorrent
-    materialgram
-    thunderbird
-    vlc
-    opencode
-    go
-    lua
-    mumble
-    element
-    spotify
-    _1password-gui
-    irssi
-    cloudflared
-    code-cursor
-    nautilus
-    matrix-commander
-    vscode
-    file-roller
-    loupe
-    strawberry
-    protonup-qt
-    gh
-	llama-cpp-vulkan
-    cloudflare-warp
-    python3
-    gnupg
-    pipes
-	gale
-    termius
-    kicad
-    freecad
-    darktable
-    reaper
-  ];
-
-
-
   home.sessionVariables = {
+    # Оставлено как в исходном конфиге: Firefox запускается без Wayland backend.
     MOZ_ENABLE_WAYLAND = "0";
-  };
-  
-  programs.git = {
-    enable = true;
-  
-    settings = {
-      user = {
-        name = "Dimaniojk";
-        email = "deividasjk001@gmail.com";
-      };
-  
-      init.defaultBranch = "main";
-    };
-  };
-
-  programs.fish = {
-    enable = true;
-
-    shellAliases = {
-      rebuild = "sudo nixos-rebuild switch";
-      nixconfig = "sudo micro /etc/nixos/configuration.nix";
-      homeconfig = "sudo micro /etc/nixos/home.nix";
-      
-    };
-  };
-  
-  programs.fish.functions.nixpush = ''
-    cd /etc/nixos
-    sudo env GH_TOKEN=(gh auth token) git push
-  '';
-
-  programs.kitty = {
-    enable   = true;
-    settings = {
-      confirm_os_window_close = 0;
-      window_padding_width       = 15;
-      font_family                = "JetBrainsMono Nerd Font";
-      font_size                  = 12;
-      background_opacity = "0.85";
-    };
-    extraConfig = ''
-      include dank-theme.conf
-      include dank-tabs.conf
-    '';
-  };
-  
-  programs.fastfetch = {
-    enable = true;
-  
-    settings = {
-      logo = {
-        type = "file";
-        source = "${./assets/ascii.txt}";
-  
-        padding = {
-          right = 3;
-        };
-      };
-  
-      display = {
-        separator = "  ";
-      };
-  
-      modules = [
-        "title"
-        "separator"
-        "os"
-        "host"
-        "kernel"
-        "uptime"
-        "packages"
-        "shell"
-        "display"
-        "de"
-        "wm"
-        "terminal"
-        "terminalfont"
-        "cpu"
-        "gpu"
-        "memory"
-        "swap"
-        "disk"
-        "localip"
-        "battery"
-        "break"
-        "colors"
-      ];
-    };
-  };
-  
-  xdg.mimeApps = {
-    enable = true;
-
-    defaultApplications = {
-      "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
-    };
   };
 
   home.stateVersion = "25.11";

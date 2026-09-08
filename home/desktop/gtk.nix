@@ -1,0 +1,80 @@
+# GTK CSS-цвета и пользовательское оформление, перенесенное из ~/.config.
+let
+  gtkColors = ''
+    /*
+    * GTK Colors
+    * Generated with Matugen
+    */
+
+    /* via thairanaru on GitHub: */
+
+    /* Destructive colors are basically error colors */
+    @define-color destructive_bg_color #ffb4ab;
+    @define-color destructive_fg_color #601410;
+    /* Follow material spec */
+    @define-color error_bg_color #ffb4ab;
+    @define-color error_fg_color #601410;
+    /* Follow material spec (also I think looks nicer) */
+    @define-color accent_fg_color #2b303c;
+    @define-color accent_bg_color #ffffff;
+    /* Use surface instead of background */
+    @define-color window_bg_color #2a2a2a;
+    @define-color window_fg_color #e4e2e3;
+    /* Make it more similar to Adwaita */
+    @define-color view_bg_color #2a2a2a;
+    @define-color view_fg_color #e4e2e3;
+    @define-color headerbar_bg_color #2a2a2a;
+    @define-color headerbar_fg_color #e4e2e3;
+    @define-color sidebar_bg_color #353535;
+    @define-color sidebar_fg_color #e4e2e3;
+    /* There is only like one application I know that uses this, and there isn't a good way to get
+    a color between surface and surface container so I think just giving this surface is a good enough fallback*/
+    @define-color secondary_sidebar_bg_color #2a2a2a;
+    @define-color secondary_sidebar_fg_color #e4e2e3;
+    @define-color card_bg_color #353535;
+    @define-color card_fg_color #e4e2e3;
+    @define-color overview_bg_color #353535;
+    @define-color overview_fg_color #e4e2e3;
+    @define-color popover_bg_color #353535;
+    @define-color popover_fg_color #e4e2e3;
+    @define-color dialog_bg_color #2a2a2a;
+    @define-color dialog_fg_color #e4e2e3;
+
+    /* Backdrop/unfocused states - prevents white flash on window unfocus */
+    @define-color headerbar_backdrop_color @window_bg_color;
+    @define-color sidebar_backdrop_color @sidebar_bg_color;
+    @define-color theme_unfocused_fg_color @window_fg_color;
+    @define-color theme_unfocused_text_color @view_fg_color;
+    @define-color theme_unfocused_bg_color @window_bg_color;
+    @define-color theme_unfocused_base_color @window_bg_color;
+    @define-color theme_unfocused_selected_bg_color @accent_bg_color;
+    @define-color theme_unfocused_selected_fg_color @accent_fg_color;
+  '';
+in
+{
+  xdg.configFile = {
+    "gtk-3.0/gtk.css" = {
+      force = true;
+      text = ''
+        @import url("dank-colors.css");
+      '';
+    };
+
+    "gtk-3.0/dank-colors.css" = {
+      force = true;
+      text = gtkColors;
+    };
+
+    "gtk-4.0/gtk.css" = {
+      force = true;
+      text = ''
+        @import url("dank-colors.css");
+      '';
+    };
+
+    "gtk-4.0/dank-colors.css" = {
+      force = true;
+      text = gtkColors;
+    };
+  };
+}

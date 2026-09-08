@@ -1,0 +1,16 @@
+# OBS Studio и плагины, нужные пользовательской записи/стримингу.
+{ pkgs, ... }:
+
+{
+  programs.obs-studio = {
+    enable = true;
+
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      pixel-art
+      obs-retro-effects
+    ];
+  };
+}

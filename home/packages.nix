@@ -1,0 +1,59 @@
+# Пользовательские приложения и CLI без отдельной декларативной настройки.
+{ pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    vesktop
+    micro
+    fjordlauncher
+    hyfetch
+    steam-run
+    xwayland-satellite
+    qbittorrent
+    materialgram
+    thunderbird
+    vlc
+    opencode
+    go
+    lua
+    mumble
+    element
+    spotify
+    _1password-gui
+    irssi
+    cloudflared
+    code-cursor
+    nautilus
+    matrix-commander
+    vscode
+    file-roller
+    loupe
+    strawberry
+    protonup-qt
+    gh
+    llama-cpp-vulkan
+    python3
+    gnupg
+    pipes
+    gale
+    termius
+    darktable
+    compsize
+    ruffle
+    wireguard-ui
+    wireguard-tools
+    playerctl
+    wtype
+    ncspot
+    exodus
+    archipelago
+    codex
+    bambu-studio
+    radmin-vpn-linux
+    bottles
+    winboat
+    docker-compose
+    btop
+    rustdesk
+  ];
+}
